@@ -22,24 +22,22 @@ workflows:
       flutter: stable
       xcode: latest
       cocoapods: default
-      groups:
-        - ios_credentials
     scripts:
       - name: Get dependencies
         script: flutter pub get
-      - name: Install CocoaPods
-        script: |
-          cd ios
-          pod install
       - name: Set up keychain
         script: |
           keychain initialize
           keychain add-certificates
           xcode-project use-profiles
-      - name: Build iOS
+      - name: Build iOS unsigned first
+        script: flutter build ios --release --no-codesign
+      - name: Build IPA
         script: |
-          flutter build ipa --release \
-            --export-options-plist=/Users/builder/export_options.plist
+          cd build/ios/iphoneos
+          mkdir Payload
+          cp -r Runner.app Payload/
+          zip -r /tmp/moonlight-memo.ipa Payload
     artifacts:
-      - build/ios/ipa/*.ipa
+      - /tmp/moonlight-memo.ipa
       - build/ios/iphoneos/*.app
