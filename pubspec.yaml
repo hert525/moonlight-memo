@@ -1,0 +1,65 @@
+name: memo_app
+description: "月光手账"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  shared_preferences: ^2.5.5
+  intl: ^0.20.2
+  image_picker: ^1.1.2
+  path_provider: ^2.1.5
+  image_gallery_saver_plus: ^4.0.1
+  flutter_local_notifications: ^19.0.0
+  timezone: ^0.10.0
+  flutter_timezone: ^3.0.1
+  file_picker: ^10.1.9
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: assets/stickers/app_icon.jpg
+  min_sdk_android: 21
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/backgrounds/match_01.jpg
+    - assets/backgrounds/match_02.png
+    - assets/backgrounds/match_03.jpg
+    - assets/backgrounds/match_06.jpg
+    - assets/backgrounds/match_08.jpg
+    - assets/backgrounds/match_09.jpg
+    - assets/backgrounds/match_15.jpg
+    - assets/backgrounds/user_01.jpg
+    - assets/backgrounds/user_02.jpg
+    - assets/backgrounds/user_03.jpg
+    - assets/backgrounds/user_04.jpg
+    - assets/backgrounds/user_05.jpg
+    - assets/backgrounds/user_06.jpg
+    - assets/backgrounds/user_07.jpg
+    - assets/backgrounds/user_08.jpg
+    - assets/backgrounds/user_09.jpg
+    - assets/backgrounds/user_10.jpg
+    - assets/backgrounds/user_11.jpg
+    - assets/backgrounds/user_12.jpg
+    - assets/backgrounds/user_13.jpg
+    - assets/backgrounds/user_14.jpg
+    - assets/backgrounds/user_15.jpg
+    - assets/backgrounds/user_16.jpg
+    - assets/backgrounds/user_17.jpg
+    - assets/backgrounds/user_18.jpg
+    - assets/backgrounds/user_19.jpg
+    - assets/stickers/
