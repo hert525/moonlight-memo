@@ -25,19 +25,14 @@ workflows:
     scripts:
       - name: Get dependencies
         script: flutter pub get
-      - name: Set up keychain
-        script: |
-          keychain initialize
-          keychain add-certificates
-          xcode-project use-profiles
-      - name: Build iOS unsigned first
+      - name: Build iOS
         script: flutter build ios --release --no-codesign
-      - name: Build IPA
+      - name: Package IPA
         script: |
           cd build/ios/iphoneos
-          mkdir Payload
+          mkdir -p Payload
           cp -r Runner.app Payload/
-          zip -r /tmp/moonlight-memo.ipa Payload
+          zip -r $CM_BUILD_DIR/moonlight-memo.ipa Payload
     artifacts:
-      - /tmp/moonlight-memo.ipa
+      - "*.ipa"
       - build/ios/iphoneos/*.app
