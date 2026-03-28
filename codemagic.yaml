@@ -25,14 +25,15 @@ workflows:
     scripts:
       - name: Get dependencies
         script: flutter pub get
-      - name: Build iOS
-        script: flutter build ios --release --no-codesign
-      - name: Package IPA
+      - name: Set up code signing
         script: |
-          cd build/ios/iphoneos
-          mkdir -p Payload
-          cp -r Runner.app Payload/
-          zip -r $CM_BUILD_DIR/moonlight-memo.ipa Payload
+          keychain initialize
+          app-store-connect fetch-signing-files "com.txre6.lns8" --type IOS_APP_ADHOC
+          keychain add-certificates
+          xcode-project use-profiles
+      - name: Build iOS
+        script: |
+          flutter build ipa --release \
+            --export-options-plist=/Users/builder/export_options.plist
     artifacts:
-      - "*.ipa"
-      - build/ios/iphoneos/*.app
+      - build/ios/ipa/*.ipa
