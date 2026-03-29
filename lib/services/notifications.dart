@@ -31,7 +31,15 @@ class MoonlightNotifications {
       }
 
       const android = AndroidInitializationSettings('@mipmap/ic_launcher');
-      const settings = InitializationSettings(android: android);
+      const darwin = DarwinInitializationSettings(
+        requestAlertPermission: true,
+        requestBadgePermission: true,
+        requestSoundPermission: true,
+      );
+      const settings = InitializationSettings(
+        android: android,
+        iOS: darwin,
+      );
       final ok = await _plugin.initialize(settings);
       debugPrint('[Notifications] initialized: $ok');
 
@@ -62,6 +70,21 @@ class MoonlightNotifications {
         debugPrint('[Notifications] exact alarm permission: $alarmPermission');
       }
 
+      // iOS permission request
+      final iosPlugin = _plugin
+          .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin
+          >();
+      if (iosPlugin != null) {
+        final granted = await iosPlugin.requestPermissions(
+          alert: true,
+          badge: true,
+          sound: true,
+        );
+        debugPrint('[Notifications] iOS permission: $granted');
+        _permissionGranted = granted ?? false;
+      }
+
       _initialized = true;
       debugPrint('[Notifications] fully initialized, permission=$_permissionGranted');
     } catch (e) {
@@ -80,6 +103,11 @@ class MoonlightNotifications {
       priority: Priority.high,
       playSound: true,
       enableVibration: true,
+    ),
+    iOS: DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
     ),
   );
 
