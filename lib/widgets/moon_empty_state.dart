@@ -22,24 +22,24 @@ class MoonEmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            HaloIcon(size: 84, child: icon),
-            const SizedBox(height: 18),
+            HaloIcon(size: 56, child: icon),
+            const SizedBox(height: 10),
             Text(
               title,
               textAlign: TextAlign.center,
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: 18,
                 fontWeight: FontWeight.w900,
                 color: Colors.white,
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 6),
             Text(
               subtitle,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 15,
-                height: 1.65,
+                fontSize: 13,
+                height: 1.5,
                 fontWeight: FontWeight.w700,
                 color: Colors.white.withAlpha(230),
               ),

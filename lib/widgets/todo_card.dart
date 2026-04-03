@@ -83,21 +83,23 @@ class TodoCard extends StatelessWidget {
               Expanded(
                 child: ListTile(
                   contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 18,
-                    vertical: 10,
+                    horizontal: 14,
+                    vertical: 4,
                   ),
+                  dense: true,
+                  visualDensity: VisualDensity.compact,
                   leading: GestureDetector(
                     onTap: onTapStar,
                     child: Text(
                       status.icon,
-                      style: const TextStyle(fontSize: 28),
+                      style: const TextStyle(fontSize: 22),
                     ),
                   ),
                   title: Text(
                     todo.title,
                     style: TextStyle(
                       fontWeight: FontWeight.w800,
-                      fontSize: 17,
+                      fontSize: 15,
                       color: titleColor,
                       decoration: done ? TextDecoration.lineThrough : null,
                       decorationColor: kHotPink,
@@ -105,39 +107,35 @@ class TodoCard extends StatelessWidget {
                     ),
                   ),
                   subtitle: Padding(
-                    padding: const EdgeInsets.only(top: 8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    padding: const EdgeInsets.only(top: 2),
+                    child: Wrap(
+                      spacing: 6,
+                      runSpacing: 4,
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
                         Text(
                           todo.statusSubtitle(),
                           style: TextStyle(
                             color: subtitleColor,
                             fontWeight: FontWeight.w700,
+                            fontSize: 12,
                           ),
                         ),
-                        const SizedBox(height: 8),
-                        Wrap(
-                          spacing: 8,
-                          runSpacing: 8,
-                          children: [
-                            if (todo.repeatMode != 'none')
-                              _TinyTextBadge(
-                                label: repeatModeLabel(todo.repeatMode),
-                                color: subtitleColor,
-                              ),
-                            if (todoCategoryBadgeLabel(
+                        if (todo.repeatMode != 'none')
+                          _TinyTextBadge(
+                            label: repeatModeLabel(todo.repeatMode),
+                            color: subtitleColor,
+                          ),
+                        if (todoCategoryBadgeLabel(
+                          categoryMeta.name,
+                        ).isNotEmpty)
+                          TinyCategoryBadge(
+                            label: todoCategoryBadgeLabel(
                               categoryMeta.name,
-                            ).isNotEmpty)
-                              TinyCategoryBadge(
-                                label: todoCategoryBadgeLabel(
-                                  categoryMeta.name,
-                                ),
-                                iconAsset: categoryMeta.iconAsset,
-                                color: subtitleColor,
-                              ),
-                          ],
-                        ),
+                            ),
+                            iconAsset: categoryMeta.iconAsset,
+                            color: subtitleColor,
+                          ),
                       ],
                     ),
                   ),
